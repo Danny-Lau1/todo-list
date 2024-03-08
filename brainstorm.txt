@@ -1,0 +1,31 @@
+each todo
+    - title
+    - description
+    - due date
+    - priority
+
+each todo after is filled out and view on the screen
+    - list the due date
+    - ability to edit 
+    - delete
+    - checkoff if done or not 
+
+ON the left sidebar:
+    Past Due
+    Today
+        - lists any activities that have a date of today
+    
+
+
+
+
+
+functions:
+    - creating a todo object
+    - editing todo object
+    - deleting todo object
+    - move todo object after being done into "completed" category 
+    - add a new project category
+
+Steps:
+1. add a project 

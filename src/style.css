@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background-color: #AC3B61;
+    color: #EEE2DC;
+    border: 1px solid black;
+}
+
+#main-container {
+    display: flex;
+}
+
+
+#sidebar {
+    min-height: calc(100vh - 100px);
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    background-color: #EDC7B7;
+    border: 1px solid black;
+}
+
+h2,
+#add-project {
+    display: inline-block;
+}
+
+#toggle-date-category,
+#project-list {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-direction: column;
+}
+
+#content {
+    flex: 1;
+    border: 5px solid purple;
+}
