@@ -29,3 +29,10 @@ functions:
 
 Steps:
 1. add a project 
+
+
+- after creating a project in the projectList array
+    - create the button for the array
+ - the button needs to represent the actual object 
+ - when i click on the button, it will bring up the project page and
+    - list all the revelent information for that project
