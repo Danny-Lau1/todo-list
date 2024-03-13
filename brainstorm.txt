@@ -27,8 +27,9 @@ functions:
     - move todo object after being done into "completed" category 
     - add a new project category
 
-Steps:
-1. add a project 
+Things to DO:
+    - after deleting a project, need to update screen appropraitely 
+    - how to get projectId within the taskform eventlistener
 
 
 - after creating a project in the projectList array
@@ -36,3 +37,8 @@ Steps:
  - the button needs to represent the actual object 
  - when i click on the button, it will bring up the project page and
     - list all the revelent information for that project
+
+- create a project. within project:
+    - click to create a task
+    - match projectid to task 
+

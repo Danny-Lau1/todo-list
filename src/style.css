@@ -1,14 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 body {
     margin: 0;
     padding: 0;
+    font-family: "JetBrains Mono", monospace;
 }
 
 header {
     height: 100px;
     display: flex;
     align-items: center;
-    background-color: #AC3B61;
-    color: #EEE2DC;
+    background-color: #C1C8E4;
+    color: #fff;
     border: 1px solid black;
 }
 
@@ -22,24 +25,117 @@ header {
     width: 25%;
     display: flex;
     flex-direction: column;
-    background-color: #EDC7B7;
+    background-color: #fbeec1;
     border: 1px solid black;
 }
 
-h2,
-#add-project {
-    display: inline-block;
+#add-project-category {
+    display: flex;
+    padding: 0 40px 0 40px;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
 }
+
+#add-project-category button {
+    flex: 1;
+}
+
+
 
 #toggle-date-category,
 #project-list {
     display: flex;
     gap: 20px;
-    padding: 20px;
+    padding: 40px;
     flex-direction: column;
 }
 
 #content {
     flex: 1;
     border: 5px solid purple;
+}
+
+#toggle-date-category button,
+#add-project-category button,
+#create-project-form button,
+#project-list button {
+    align-items: center;
+    appearance: none;
+    background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+#project-list button {
+    background-image: radial-gradient(100% 100% at 100% 0, #ffce5a 0, #e41a1a 100%);
+}
+
+#create-project-form #confirm-project-btn {
+    background-image: radial-gradient(100% 100% at 100% 0, #b8ff61 0, #02970c 100%);
+}
+
+#create-project-form #cancel-project-btn {
+    background-image: radial-gradient(100% 100% at 100% 0, #ff7361 0, #fc2a00 100%);
+}
+
+#toggle-date-category button:focus {
+    box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+#toggle-date-category button:hover {
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+#toggle-date-category button:active {
+    box-shadow: #3c4fe0 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#create-and-filter-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+#checkbox-and-title-div {
+    display: flex;
+}
+
+#task-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#task-buttons-div {
+    display: flex;
 }

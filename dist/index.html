@@ -23,35 +23,46 @@
                     <button>Past Due</button>
 
                 </section>
-                <div>
+                <div id="add-project-category">
                     <h2>Add Project</h2>
                     <button id="add-project">+</button>
                 </div>
                 <section id="project-list">
                 </section>
-                </section>
-            </div>
-            <div id="content">
-                <!-- <section class="project-header">
-                    <h2>Title of Project</h2>
-                    <button class="delete-project">Trash</button>
-                    <button>Edit</button>
-                </section>
-                <section>
-                    filter and create task buttons
-                </section>
-                <section>
-                    all the tasks here
-                </section> -->
 
             </div>
+            <div id="content">
+                <div>
+                    <input type="checkbox" id="completed" name="completed" />
+
+                </div>
+            </div>
         </div>
+
+
         <dialog id="create-project-modal">
             <form action="" id="create-project-form">
                 <label for="project-title">Project Title *</label>
                 <input type="text" id="project-title" name="project-title">
-                <button type="submit" class="confirm-project-btn">Confirm</button>
+                <label for="project-description"> Project Description</label>
+                <input type="text" id="project-description" name="project-description">
+                <button type="submit" id="confirm-project-btn">Confirm</button>
                 <button id="cancel-project-btn">Cancel</button>
+            </form>
+        </dialog>
+
+        <dialog id="create-task-modal">
+            <form action="" id="create-task-form">
+                <label for="task-title">Task:</label>
+                <input type="text" name="task-title" id="task-title">
+                <label for="due-date">Due by:</label>
+                <input type="date" name="due-date" id="due-date">
+                <label for="high-priority">High Priority</label>
+                <input type="radio" id="high-priority" value="high-priority" name="task-priority">
+                <label for="low-priority">Low Priority</label>
+                <input type="radio" id="low-priority" value="low-priority" name="task-priority">
+                <button type="submit" class="confirm-task-btn">Confirm</button>
+                <button id="cancel-task-btn">Cancel</button>
             </form>
         </dialog>
         <!-- <dialog id="edit-project-modal">
