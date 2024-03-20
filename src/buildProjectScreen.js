@@ -18,11 +18,11 @@ export function updateProjectScreen(project) {
 
     const editProjectBtn = document.createElement("button")
     editProjectBtn.textContent = "Edit Project"
-    editProjectBtn.dataset.id = project.getProjectId()
+    editProjectBtn.dataset.projectId = project.getProjectId()
 
     const deleteProjectBtn = document.createElement("button")
     deleteProjectBtn.textContent = "Delete Project"
-    deleteProjectBtn.dataset.id = project.getProjectId()
+    deleteProjectBtn.dataset.projectId = project.getProjectId()
 
     // create task button
     const createAndFilterSection = document.createElement("section")
@@ -32,7 +32,7 @@ export function updateProjectScreen(project) {
     createTaskBtn.textContent = "Create Task"
 
     // link the task form with the projectId to put tasks in their respective projects
-    taskForm.dataset.id = project.getProjectId()
+    taskForm.dataset.projectId = project.getProjectId()
 
     // create filter dropdown
     const priorityLabel = document.createElement("label")
@@ -79,8 +79,11 @@ export function updateProjectScreen(project) {
         taskDate.textContent = task.dueDate
         const editTaskBtn = document.createElement("button")
         editTaskBtn.textContent = "Edit Task"
+        editTaskBtn.dataset.taskId = task.id
+        editTaskBtn.dataset.projectId = project.getProjectId()
         const deleteTaskBtn = document.createElement("button")
-        deleteTaskBtn.dataset.id = task.id
+        deleteTaskBtn.dataset.taskId = task.id
+        deleteTaskBtn.dataset.projectId = project.getProjectId()
         deleteTaskBtn.textContent = "Delete Task"
         taskButtonsDiv.appendChild(taskDate)
         taskButtonsDiv.appendChild(editTaskBtn)

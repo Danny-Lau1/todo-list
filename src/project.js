@@ -52,7 +52,6 @@ export function deleteProject(id) {
             projectList.splice(i, 1)
         }
     }
-
 }
 
 // push project to project list 

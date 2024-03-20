@@ -8,6 +8,25 @@ class Task {
         this.id = id
         this.projectId = projectId
     }
+
+    updateTask(taskTitle, taskDueDate, taskPriority) {
+        this.title = taskTitle;
+        this.dueDate = taskDueDate;
+        this.priority = this.taskPriority
+    }
+
+    getTitle() {
+        return this.title
+    }
+
+    getDueDate() {
+        return this.dueDate
+    }
+
+    getPriority() {
+        return this.priority
+    }
+
 }
 
 export function createNewTask(title, dueDate, priority, projectId) {
@@ -20,12 +39,13 @@ export function createNewTask(title, dueDate, priority, projectId) {
 export function deleteTask(projectInstance, Id) {
     const projectListOfTasks = projectInstance.getTasks()
     console.log(`1. TASK ID IS ${Id}`)
-    console.log(projectListOfTasks)
+
     for (let i = 0; i < projectListOfTasks.length; i++) {
         if (projectListOfTasks[i].id === parseInt(Id)) {
             projectListOfTasks.splice(i, 1)
         }
     }
+    console.log(projectInstance.getTasks())
 }
 
 function incrementTaskId() {

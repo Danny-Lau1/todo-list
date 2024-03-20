@@ -48,7 +48,7 @@ function addProjects(event) {
 projectForm.addEventListener("submit", (event) => {
     event.preventDefault()
 
-    const projectId = projectForm.dataset.id;
+    const projectId = projectForm.dataset.projectId;
     let projectInstance;
 
     // if a projectId already exists in editing form's html
@@ -65,7 +65,7 @@ projectForm.addEventListener("submit", (event) => {
 
     // reset the project form's html id, update sidebar, update project screen
     // reset project form inputs, close project modal
-    projectForm.dataset.id = ""
+    projectForm.dataset.projectId = ""
     updateProjectScreen(projectInstance)
     updateSideBar()
     projectForm.reset()
@@ -82,7 +82,7 @@ function updateSideBar() {
     projectList.forEach((project) => {
         const individualProjectBtn = document.createElement("button")
         individualProjectBtn.textContent = project.title
-        individualProjectBtn.dataset.id = project.getProjectId()
+        individualProjectBtn.dataset.projectId = project.getProjectId()
         sidebarProjectList.appendChild(individualProjectBtn)
     })
 }
@@ -91,7 +91,7 @@ function updateSideBar() {
 // Bring up the selected project from the sidebar to the content screen
 sidebarProjectList.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
-        const projectId = event.target.dataset.id;
+        const projectId = event.target.dataset.projectId;
         const project = projectList.find(project => project.id === parseInt(projectId));
         updateProjectScreen(project)
     }
@@ -102,14 +102,15 @@ contentContainer.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
 
         const button = event.target
-        const projectId = button.dataset.id
-
+        const projectId = button.dataset.projectId
+        console.log(`IS THIS THE RIGHT PROJECT ID ${projectId}`)
+        const taskId = button.dataset.taskId
         // Bring up the filled out project form
         // assign the projectId to the dataset.id of the project form
         if (button.textContent === "Edit Project") {
             // Implement edit project functionality
             populateEditForm(projectId)
-            projectForm.dataset.id = projectId
+            projectForm.dataset.projectId = projectId
             projectModal.showModal();
 
         }
@@ -127,13 +128,30 @@ contentContainer.addEventListener("click", (event) => {
         }
 
         if (button.textContent === "Delete Task") {
-            const taskId = button.dataset.id
+
+            console.log(`IS THIS THE RIGHT TASK ID ${taskId}`)
 
             removeTask(projectId, taskId)
+        }
+
+        if (button.textContent === "Edit Task") {
+            populateTaskEditForm(projectId, taskId)
+            taskForm.dataset.taskId = taskId
+            taskModal.showModal()
         }
     }
 });
 
+
+function populateTaskEditForm(projectId, taskId) {
+    const project = returnProjectInstance(projectId)
+    const task = (project.listOfTasks.find(task => task.id === parseInt(taskId)))
+    const taskTitle = document.getElementById("task-title")
+    const taskDueDate = document.getElementById("due-date")
+    taskTitle.value = task.getTitle()
+    taskDueDate.value = task.getDueDate()
+
+}
 
 function removeTask(projectId, taskId) {
     const projectInstance = returnProjectInstance(projectId)
@@ -159,18 +177,58 @@ function populateEditForm(projectId) {
 
 
 function openTaskModal() {
-    console.log(`HERE ${taskForm.dataset.id}`)
+    console.log(`HERE  task id ${taskForm.dataset.taskId}`)
     taskModal.showModal()
 }
 
 
 taskForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    const projectId = taskForm.dataset.id
-    // capture information from form
-    const taskTitle = document.getElementById("task-title").value
-    const taskDueDate = document.getElementById("due-date").value
-    const taskPriority = function () {
+    const projectId = taskForm.dataset.projectId
+    console.log(`projectId: ${projectId}`)
+    const projectInstance = returnProjectInstance(projectId)
+
+    const taskId = taskForm.dataset.taskId
+    let taskInstance
+    console.log(`taskId: ${taskId}`)
+
+    // if a taskId already exists in task form's html
+    if (taskId) {
+        // capture information from form
+        const taskTitle = document.getElementById("task-title").value
+        const taskDueDate = document.getElementById("due-date").value
+        const taskPriority = function () {
+            if (highPriorityRadio.checked) {
+                return highPriorityRadio.value
+            }
+            else if (lowPriorityRadio.checked) {
+                return lowPriorityRadio.value
+            }
+        }()
+
+        // return the existing task instance to update
+        taskInstance = (projectInstance.listOfTasks.find(task => task.id === parseInt(taskId)))
+        editTask(taskInstance, taskTitle, taskDueDate, taskPriority)
+    }
+    else {
+        // add the new task to the project instance
+        taskInstance = addTask(event, projectId)
+        projectInstance.addTaskToProject(taskInstance)
+    }
+
+
+    taskForm.dataset.taskId = ""
+    taskForm.reset()
+    taskModal.close()
+    console.log(projectList)
+    updateProjectScreen(projectInstance)
+})
+
+function addTask(event, projectId) {
+    event.preventDefault()
+    let taskTitle = document.getElementById("task-title").value
+    let taskDueDate = document.getElementById("due-date").value
+    let taskPriority = function () {
         if (highPriorityRadio.checked) {
             return highPriorityRadio.value
         }
@@ -178,16 +236,15 @@ taskForm.addEventListener("submit", (event) => {
             return lowPriorityRadio.value
         }
     }()
-    const taskInstance = createNewTask(taskTitle, taskDueDate, taskPriority, projectId)
 
-    // add the new task to the project instance
-    const projectInstance = returnProjectInstance(projectId)
-    projectInstance.addTaskToProject(taskInstance)
-    taskForm.reset()
-    taskModal.close()
-    console.log(projectList)
-    updateProjectScreen(projectInstance)
-})
+    const taskInstance = createNewTask(taskTitle, taskDueDate, taskPriority, projectId)
+    return taskInstance
+}
+
+function editTask(taskInstance, taskTitle, taskDueDate, taskPriority) {
+    console.log(taskInstance)
+    taskInstance.updateTask(taskTitle, taskDueDate, taskPriority)
+}
 
 
 function returnProjectInstance(projectId) {
