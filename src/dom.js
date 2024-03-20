@@ -12,6 +12,21 @@ const taskModal = document.getElementById("create-task-modal")
 const cancelTaskBtn = document.getElementById("cancel-task-btn")
 const highPriorityRadio = document.getElementById("high-priority");
 const lowPriorityRadio = document.getElementById("low-priority");
+const contentDiv = document.getElementById("content")
+
+contentDiv.addEventListener("change", (event) => {
+    let selectedPriority = event.target.value
+    let projectId = event.target.dataset.projectId
+    let projectInstance = returnProjectInstance(projectId)
+    console.log(selectedPriority)
+    if (selectedPriority === "high-priority" || selectedPriority === "low-priority") {
+        console.log("HIGH")
+        updateProjectScreen(projectInstance, selectedPriority)
+    }
+    else {
+        updateProjectScreen(projectInstance)
+    }
+})
 
 
 // open up project modal 

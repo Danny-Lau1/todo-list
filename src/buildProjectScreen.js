@@ -1,7 +1,7 @@
 export const contentContainer = document.getElementById("content")
 export const taskForm = document.getElementById("create-task-form")
 
-export function updateProjectScreen(project) {
+export function updateProjectScreen(project, selectedPriority) {
     contentContainer.innerHTML = ""
 
     // create title
@@ -39,7 +39,9 @@ export function updateProjectScreen(project) {
     priorityLabel.textContent = "Filter By Priority: "
     priorityLabel.setAttribute("for", "selected-priority")
     const selectPriority = document.createElement("select")
+    selectPriority.id = "selected-priority"
     selectPriority.setAttribute("name", "selected-priority")
+    selectPriority.dataset.projectId = project.getProjectId()
     const priorityAll = document.createElement("option")
     priorityAll.textContent = "All"
     priorityAll.value = "all"
@@ -54,7 +56,17 @@ export function updateProjectScreen(project) {
 
     const taskSection = document.createElement("section")
     taskSection.id = "task-section"
-    const projectTasks = project.getTasks()
+    let projectTasks = project.getTasks()
+
+    if (selectedPriority == "high-priority") {
+        priorityHigh.selected = true
+        projectTasks = projectTasks.filter(task => task.getPriority() === "high-priority")
+    }
+
+    else if (selectedPriority == "low-priority") {
+        priorityLow.selected = true
+        projectTasks = projectTasks.filter(task => task.getPriority() === "low-priority")
+    }
 
     // loop through a project's task to create each task element
     projectTasks.forEach((task) => {

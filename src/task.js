@@ -12,7 +12,7 @@ class Task {
     updateTask(taskTitle, taskDueDate, taskPriority) {
         this.title = taskTitle;
         this.dueDate = taskDueDate;
-        this.priority = this.taskPriority
+        this.priority = taskPriority
     }
 
     getTitle() {
