@@ -7,6 +7,11 @@ class Task {
         this.priority = priority
         this.id = id
         this.projectId = projectId
+        this.completed = false
+    }
+
+    toggleCompleted() {
+        this.completed = !(this.completed)
     }
 
     updateTask(taskTitle, taskDueDate, taskPriority) {

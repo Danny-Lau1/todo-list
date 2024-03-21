@@ -17,16 +17,20 @@ const contentDiv = document.getElementById("content")
 // filtering by high and low priority tasks
 contentDiv.addEventListener("change", (event) => {
 
+    let projectId = event.target.dataset.projectId
+    let projectInstance = returnProjectInstance(projectId)
+    let taskId = event.target.dataset.taskId
+
+    console.log(`proijectid: ${projectId}, taskiD: ${taskId}`)
 
     if (event.target.tagName === "INPUT") {
-        event.target.dataset.checkedOff = "true"
+        const taskInstance = (projectInstance.listOfTasks.find(task => task.id === parseInt(taskId)))
+        console.log(taskInstance)
+        taskInstance.toggleCompleted()
 
     }
     else {
-
         let selectedPriority = event.target.value
-        let projectId = event.target.dataset.projectId
-        let projectInstance = returnProjectInstance(projectId)
         console.log(selectedPriority)
         if (selectedPriority === "high-priority" || selectedPriority === "low-priority") {
             console.log("HIGH")

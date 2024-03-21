@@ -80,6 +80,13 @@ export function updateProjectScreen(project, selectedPriority) {
         checkboxAndTitleDiv.id = "checkbox-and-title-div"
         const checkboxInput = document.createElement('input')
         checkboxInput.type = "checkbox"
+        checkboxInput.dataset.projectId = project.getProjectId()
+        checkboxInput.dataset.taskId = task.id
+
+        if (task.completed === true) {
+            checkboxInput.checked = true
+        }
+
         const individualTaskTitle = document.createElement("h3")
         individualTaskTitle.textContent = task.title
         checkboxAndTitleDiv.appendChild(checkboxInput)
