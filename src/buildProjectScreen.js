@@ -15,6 +15,7 @@ export function updateProjectScreen(project, selectedPriority) {
     // create edit and delete buttons
     // attach the project's id property to it edit and delete button
     const editAndDeleteDiv = document.createElement('div')
+    editAndDeleteDiv.className = "project-button-div"
 
     const editProjectBtn = document.createElement("button")
     editProjectBtn.textContent = "Edit Project"
@@ -46,6 +47,7 @@ export function updateProjectScreen(project, selectedPriority) {
     priorityAll.textContent = "All"
     priorityAll.value = "all"
     const priorityHigh = document.createElement("option")
+    priorityHigh.id = "high-priority"
     priorityHigh.textContent = "High Priority"
     priorityHigh.value = "high-priority"
     const priorityLow = document.createElement("option")
@@ -78,7 +80,6 @@ export function updateProjectScreen(project, selectedPriority) {
         checkboxAndTitleDiv.id = "checkbox-and-title-div"
         const checkboxInput = document.createElement('input')
         checkboxInput.type = "checkbox"
-        checkboxAndTitleDiv.name = "completed"
         const individualTaskTitle = document.createElement("h3")
         individualTaskTitle.textContent = task.title
         checkboxAndTitleDiv.appendChild(checkboxInput)

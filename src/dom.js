@@ -14,17 +14,27 @@ const highPriorityRadio = document.getElementById("high-priority");
 const lowPriorityRadio = document.getElementById("low-priority");
 const contentDiv = document.getElementById("content")
 
+// filtering by high and low priority tasks
 contentDiv.addEventListener("change", (event) => {
-    let selectedPriority = event.target.value
-    let projectId = event.target.dataset.projectId
-    let projectInstance = returnProjectInstance(projectId)
-    console.log(selectedPriority)
-    if (selectedPriority === "high-priority" || selectedPriority === "low-priority") {
-        console.log("HIGH")
-        updateProjectScreen(projectInstance, selectedPriority)
+
+
+    if (event.target.tagName === "INPUT") {
+        event.target.dataset.checkedOff = "true"
+
     }
     else {
-        updateProjectScreen(projectInstance)
+
+        let selectedPriority = event.target.value
+        let projectId = event.target.dataset.projectId
+        let projectInstance = returnProjectInstance(projectId)
+        console.log(selectedPriority)
+        if (selectedPriority === "high-priority" || selectedPriority === "low-priority") {
+            console.log("HIGH")
+            updateProjectScreen(projectInstance, selectedPriority)
+        }
+        else {
+            updateProjectScreen(projectInstance)
+        }
     }
 })
 
@@ -38,6 +48,8 @@ addProjectBtn.addEventListener("click", () => {
 // close project modal by cancelling
 cancelProjectBtn.addEventListener("click", (event) => {
     event.preventDefault()
+    projectForm.dataset.projectId = ""
+    projectForm.reset()
     projectModal.close()
 })
 
@@ -45,6 +57,8 @@ cancelProjectBtn.addEventListener("click", (event) => {
 //close task modal by cancelling
 cancelTaskBtn.addEventListener("click", (event) => {
     event.preventDefault()
+    taskForm.dataset.taskId = ""
+    taskForm.reset()
     taskModal.close()
 })
 
@@ -114,6 +128,7 @@ sidebarProjectList.addEventListener("click", (event) => {
 
 
 contentContainer.addEventListener("click", (event) => {
+
     if (event.target.tagName === "BUTTON") {
 
         const button = event.target
@@ -163,6 +178,16 @@ function populateTaskEditForm(projectId, taskId) {
     const task = (project.listOfTasks.find(task => task.id === parseInt(taskId)))
     const taskTitle = document.getElementById("task-title")
     const taskDueDate = document.getElementById("due-date")
+    const taskPriority = document.getElementById("selected-priority")
+
+    taskPriority.value = task.getPriority()
+    console.log(taskPriority.value)
+    if (taskPriority.value === "high-priority") {
+        highPriorityRadio.checked = true
+    }
+    else if (taskPriority.value === "low-priority") {
+        lowPriorityRadio.checked = true
+    }
     taskTitle.value = task.getTitle()
     taskDueDate.value = task.getDueDate()
 

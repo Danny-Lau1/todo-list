@@ -41,8 +41,6 @@ header {
     flex: 1;
 }
 
-
-
 #toggle-date-category,
 #project-list {
     display: flex;
@@ -52,10 +50,19 @@ header {
 }
 
 #content {
+    padding: 20px;
     flex: 1;
     border: 5px solid purple;
 }
 
+.project-button-div {
+    display: flex;
+    gap: 10px;
+}
+
+.project-header button,
+#create-and-filter-section button,
+#task-buttons-div button,
 #toggle-date-category button,
 #add-project-category button,
 #create-project-form button,
@@ -90,8 +97,32 @@ header {
     font-size: 18px;
 }
 
+.project-header button {
+    background-image: radial-gradient(100% 100% at 100% 0, #125e1b 0, #007914 100%);
+}
+
+#create-and-filter-section button,
+#task-buttons-div button {
+    background-image: radial-gradient(100% 100% at 100% 0, #EFE2BA 0, #D79922 100%);
+}
+
 #project-list button {
     background-image: radial-gradient(100% 100% at 100% 0, #ffce5a 0, #e41a1a 100%);
+}
+
+#project-list button:hover {
+    background-image: radial-gradient(100% 100% at 100% 0, #ffce5a 0, #e41a1a 100%);
+    transform: translateY(-2px);
+}
+
+#project-list button:focus {
+    box-shadow: #b24d00 0 0 0 1.5px inset, rgba(170, 0, 0, 0.656) 0 2px 4px, rgba(65, 66, 35, 0.3) 0 7px 13px -3px, #ba2800 0 -3px 0 inset;
+
+}
+
+#project-list button:active {
+    box-shadow: #e0733c 0 3px 7px inset;
+    transform: translateY(2px);
 }
 
 #create-project-form #confirm-project-btn {
@@ -123,19 +154,24 @@ header {
 }
 
 #create-and-filter-section {
+    padding: 20px 0 20px 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #checkbox-and-title-div {
     display: flex;
+    gap: 10px;
 }
 
 #task-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #task-buttons-div {
     display: flex;
+    gap: 10px;
 }
