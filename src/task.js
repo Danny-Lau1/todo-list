@@ -32,6 +32,10 @@ class Task {
         return this.priority
     }
 
+    getTaskProjectId() {
+        return this.projectId
+    }
+
 }
 
 export function createNewTask(title, dueDate, priority, projectId) {

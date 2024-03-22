@@ -54,6 +54,28 @@ export function updateProjectScreen(project, selectedPriority) {
     priorityLow.textContent = "Low Priority"
     priorityLow.value = "low-priority"
 
+    // add labels for tasks
+
+    const taskHeaders = document.createElement("section")
+    taskHeaders.id = "task-header"
+    const taskColumn = document.createElement("h4")
+    taskColumn.textContent = "Task"
+    const headerDiv = document.createElement("div")
+    headerDiv.id = "task-header-div"
+    const fillerOne = document.createElement("button")
+    fillerOne.textContent = "Edit Task"
+
+    const fillerTwo = document.createElement("button")
+    fillerTwo.textContent = "Delete Task"
+    const taskDueDateHeader = document.createElement("h4")
+    taskDueDateHeader.textContent = "Due Date"
+
+    headerDiv.appendChild(taskDueDateHeader)
+    headerDiv.appendChild(fillerOne)
+    headerDiv.appendChild(fillerTwo)
+    taskHeaders.appendChild(taskColumn)
+    taskHeaders.appendChild(headerDiv)
+
     // display all of a project's task
 
     const taskSection = document.createElement("section")
@@ -132,6 +154,7 @@ export function updateProjectScreen(project, selectedPriority) {
     selectPriority.appendChild(priorityLow)
     createAndFilterSection.appendChild(createTaskBtn)
 
+    contentContainer.appendChild(taskHeaders)
     contentContainer.appendChild(taskSection)
 
 }

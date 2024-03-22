@@ -12,7 +12,7 @@ header {
     align-items: center;
     background-color: #C1C8E4;
     color: #fff;
-    border: 1px solid black;
+
 }
 
 #main-container {
@@ -60,6 +60,8 @@ header {
     gap: 10px;
 }
 
+#task-header-div button,
+#create-task-form button,
 .project-header button,
 #create-and-filter-section button,
 #task-buttons-div button,
@@ -95,6 +97,14 @@ header {
     white-space: nowrap;
     will-change: box-shadow, transform;
     font-size: 18px;
+}
+
+#task-header-div button {
+    visibility: hidden;
+}
+
+#create-task-form button {
+    background-image: radial-gradient(100% 100% at 100% 0, #5e1253 0, #af0035 100%);
 }
 
 .project-header button {
@@ -174,4 +184,32 @@ header {
 #task-buttons-div {
     display: flex;
     gap: 10px;
+}
+
+#task-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid black;
+}
+
+#task-header-div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#date-and-title-div {
+    display: flex;
+    gap: 30px;
+}
+
+#column-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid black;
+}
+
+#date-and-project-header {
+    display: flex;
+    gap: 20px;
 }

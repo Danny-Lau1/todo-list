@@ -1,8 +1,11 @@
 import { projectList, createNewProject, deleteProject } from "./project.js"
 import { createNewTask, deleteTask } from "./task.js"
 import { contentContainer, taskForm, updateProjectScreen } from "./buildProjectScreen.js"
+import { renderImportant, renderCompleted } from "./renderCategories.js"
 
-
+const todayBtn = document.getElementById("today")
+const importantBtn = document.getElementById("important")
+const completedBtn = document.getElementById("completed")
 const addProjectBtn = document.getElementById("add-project")
 const projectModal = document.getElementById("create-project-modal")
 const cancelProjectBtn = document.getElementById("cancel-project-btn")
@@ -14,9 +17,22 @@ const highPriorityRadio = document.getElementById("high-priority");
 const lowPriorityRadio = document.getElementById("low-priority");
 const contentDiv = document.getElementById("content")
 
-// filtering by high and low priority tasks
-contentDiv.addEventListener("change", (event) => {
+todayBtn.addEventListener("click", () => {
+    renderToday()
+})
 
+importantBtn.addEventListener("click", () => {
+    renderImportant()
+})
+
+completedBtn.addEventListener("click", () => {
+    renderCompleted()
+})
+
+
+
+contentDiv.addEventListener("change", (event) => {
+    // checkbox functionality
     let projectId = event.target.dataset.projectId
     let projectInstance = returnProjectInstance(projectId)
     let taskId = event.target.dataset.taskId
@@ -29,6 +45,7 @@ contentDiv.addEventListener("change", (event) => {
         taskInstance.toggleCompleted()
 
     }
+    // filtering by high and low priority tasks
     else {
         let selectedPriority = event.target.value
         console.log(selectedPriority)
@@ -153,7 +170,6 @@ contentContainer.addEventListener("click", (event) => {
         if (button.textContent === "Delete Project") {
             // Implement delete project functionality
             removeProject(projectId)
-
         }
 
         if (button.textContent === "Create Task") {
@@ -162,9 +178,6 @@ contentContainer.addEventListener("click", (event) => {
         }
 
         if (button.textContent === "Delete Task") {
-
-            console.log(`IS THIS THE RIGHT TASK ID ${taskId}`)
-
             removeTask(projectId, taskId)
         }
 
@@ -221,7 +234,6 @@ function populateEditForm(projectId) {
 
 
 function openTaskModal() {
-    console.log(`HERE  task id ${taskForm.dataset.taskId}`)
     taskModal.showModal()
 }
 
@@ -229,12 +241,9 @@ function openTaskModal() {
 taskForm.addEventListener("submit", (event) => {
     event.preventDefault()
     const projectId = taskForm.dataset.projectId
-    console.log(`projectId: ${projectId}`)
     const projectInstance = returnProjectInstance(projectId)
-
     const taskId = taskForm.dataset.taskId
     let taskInstance
-    console.log(`taskId: ${taskId}`)
 
     // if a taskId already exists in task form's html
     if (taskId) {
@@ -291,7 +300,7 @@ function editTask(taskInstance, taskTitle, taskDueDate, taskPriority) {
 }
 
 
-function returnProjectInstance(projectId) {
+export function returnProjectInstance(projectId) {
     const projectInstance = projectList.find(project => project.id === parseInt(projectId));
     return projectInstance
 }
